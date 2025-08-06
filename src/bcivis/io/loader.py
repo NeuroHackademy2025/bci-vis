@@ -29,11 +29,11 @@ class BIDSDataLoader:
         if self.verbose:
             print(f"Loading BIDS data from: {bids_path}")
 
-        self.raw = read_raw_bids(bids_path=bids_path, verbose=self.verbose)
-        self.events, self.event_id = mne.events_from_annotations(self.raw)
+        verbose_level = 'CRITICAL' if not self.verbose else True
 
-        if self.verbose:
-            print("Original MNE event_id:", self.event_id)
+        self.raw = read_raw_bids(bids_path=bids_path, verbose=verbose_level)
+        self.events, self.event_id = mne.events_from_annotations(self.raw, verbose=verbose_level)
+
 
         
     def summary(self):
