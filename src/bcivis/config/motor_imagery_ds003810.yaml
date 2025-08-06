@@ -1,0 +1,8 @@
+bids_root: D:/Niv/bci_vis/BIDS
+task: MIvsRest
+subjects: ["02", "04"]
+runs: ["1", "2"]
+class_map:
+  dominant_hand: 1
+  rest: 2
+verbose: False

@@ -1,6 +1,0 @@
-data_key: 'data'          
-sfreq_key: 'fs'            
-ch_names_key: 'channels'   
-labels_key: 'labels'      
-trials_key: 'onsets'       
-montage: 'standard_1020'   
