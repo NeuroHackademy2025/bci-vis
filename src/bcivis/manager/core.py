@@ -1,6 +1,7 @@
 from src.bcivis.io.loader import BIDSDataLoader
 from src.bcivis.preprocessing.cleaning_pipeline import preprocess_raw
-
+from src.bcivis.vis.visualization import apply_montage, plot_raw, plot_psd, plot_sensors, plot_epoch_psd
+                
 
 class DatasetManager:
     def __init__(self, config):
@@ -42,3 +43,26 @@ class DatasetManager:
 
     def get_all_epochs(self):
         return self.epochs_list
+    
+
+    def summarize_all(self, with_plots=False):
+        for i, loader in enumerate(self.loaders):
+            print(f"\n✅ Loader {i+1}")
+            print(f"Subject: {loader.subject} | Run: {loader.run}")
+            print("Raw info:", loader.raw.info)
+            print("Event IDs:", loader.event_id)
+            print("Events shape:", loader.events.shape)
+            print("Epochs shape:", self.epochs_list[i].get_data().shape)
+
+            if with_plots:
+                print("Generating plots...")
+                raw = loader.get_raw()
+                apply_montage(raw, self.config)
+                plot_sensors(raw, self.config)
+                plot_raw(raw, self.config)
+                plot_psd(raw, self.config)
+                for label in loader.event_id:
+                    if label in self.epochs_list[i].event_id:
+                        plot_epoch_psd(self.epochs_list[i], label, self.config)
+                print("Plots generated.")
+

@@ -9,13 +9,5 @@ with open(config_path, "r") as f:
 manager = DatasetManager(config=config)
 manager.load_all()
 manager.preprocess_all()
+manager.summarize_all(with_plots=config.get("sanity_check", {}).get("enable_plots", False))
 
-
-# Sanity check
-for i, loader in enumerate(manager.loaders):
-    print(f"\n✅ Loader {i+1}")
-    print(f"Subject: {loader.subject} | Run: {loader.run}")
-    print("Raw info:", loader.raw.info)
-    print("Event IDs:", loader.event_id)
-    print("Events shape:", loader.events.shape if loader.events is not None else None)
-    print("Epochs shape:", manager.get_all_epochs()[i].get_data().shape)

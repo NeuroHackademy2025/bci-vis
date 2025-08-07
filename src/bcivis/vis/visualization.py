@@ -1,15 +1,24 @@
 import mne
 
-
 def plot_raw(raw, config):
     vis_cfg = config.get("visualization", {})
     duration = vis_cfg.get("duration", 60.0)
     start = vis_cfg.get("start", 0.0)
     n_channels = vis_cfg.get("n_channels", 8)
     scalings = vis_cfg.get("scalings", dict(eeg=1e2))
+    show_events = vis_cfg.get("show_events", True)
 
-    raw.plot(duration=duration, start=start, scalings=scalings,
-             n_channels=n_channels, title="Raw EEG Signal")
+    raw_copy = raw.copy()
+
+    if not show_events:
+        raw_copy.set_annotations(None)
+
+    raw_copy.plot(duration=duration,
+                  start=start,
+                  scalings=scalings,
+                  n_channels=n_channels,
+                  title="Raw EEG Signal")
+
 
 
 def plot_psd(raw, config):

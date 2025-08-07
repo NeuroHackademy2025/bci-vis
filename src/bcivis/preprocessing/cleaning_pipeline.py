@@ -7,7 +7,7 @@ def preprocess_raw(raw: Raw, event_id: dict, events, config: dict):
     # Timing
     tmin = pre_cfg.get("tmin", -0.5)
     tmax = pre_cfg.get("tmax", 2.5)
-    baseline = pre_cfg.get("baseline", (None, 0))
+    baseline = pre_cfg.get("baseline", None)
     load_data = pre_cfg.get("load_data", False)
 
     # Filtering

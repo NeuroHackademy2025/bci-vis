@@ -19,7 +19,7 @@ preprocessing:
   notch_filter: 50
   tmin: 0.5
   tmax: 2.5
-  baseline: [0.5, 1.0]  # or baseline: [None, 1.0] if you want "from beginning to 1.0s"
+  baseline: [0.5, 1.0]  
 
 visualization:
   duration: 100.0
@@ -31,6 +31,10 @@ visualization:
   montage_kind: standard_1020
   psd_fmin: 0.1
   psd_fmax: 45.0
-  psd_average: true
+  psd_average: False
   picks: eeg
+  show_events: False
+
+sanity_check:
+  enable_plots: true
 
