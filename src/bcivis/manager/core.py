@@ -1,6 +1,6 @@
 from src.bcivis.io.loader import BIDSDataLoader
 from src.bcivis.preprocessing.cleaning_pipeline import preprocess_raw
-from src.bcivis.vis.visualization import apply_montage, plot_raw, plot_psd, plot_sensors, plot_epoch_psd
+from src.bcivis.vis.visualization import apply_montage, plot_all_conditionwise, plot_raw, plot_psd, plot_sensors, plot_all_conditionwise
                 
 
 class DatasetManager:
@@ -61,8 +61,8 @@ class DatasetManager:
                 plot_sensors(raw, self.config)
                 plot_raw(raw, self.config)
                 plot_psd(raw, self.config)
-                for label in loader.event_id:
-                    if label in self.epochs_list[i].event_id:
-                        plot_epoch_psd(self.epochs_list[i], label, self.config)
-                print("Plots generated.")
 
+                event_labels = list(loader.event_id.keys())
+                plot_all_conditionwise(self.epochs_list[i], event_labels, self.config)
+
+                print("Plots generated.")
