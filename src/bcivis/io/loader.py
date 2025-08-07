@@ -32,7 +32,8 @@ class BIDSDataLoader:
         verbose_level = 'CRITICAL' if not self.verbose else True
 
         self.raw = read_raw_bids(bids_path=bids_path, verbose=verbose_level)
-        self.events, self.event_id = mne.events_from_annotations(self.raw, verbose=verbose_level)
+        event_map = self.config.get("event_id", None)
+        self.events, self.event_id = mne.events_from_annotations(self.raw, event_id=event_map, verbose=verbose_level)
 
 
         
