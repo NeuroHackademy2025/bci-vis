@@ -34,8 +34,6 @@ class BIDSDataLoader:
         self.raw = read_raw_bids(bids_path=bids_path, verbose=verbose_level)
         event_map = self.config.get("event_id", None)
         self.events, self.event_id = mne.events_from_annotations(self.raw, event_id=event_map, verbose=verbose_level)
-
-
         
     def summary(self):
         print(f"Subject: {self.subject}, Task: {self.task}, Run: {self.run}")
@@ -49,18 +47,3 @@ class BIDSDataLoader:
 
     def get_events(self):
         return self.events, self.event_id
-
-    @staticmethod
-    def from_config(config_path, verbose=False):
-        with open(config_path, "r") as f:
-            cfg = yaml.safe_load(f)
-
-        return BIDSDataLoader(
-            bids_root=cfg["bids_root"],
-            subject=cfg["subject"],
-            task=cfg["task"],
-            run=cfg["run"],
-            session=cfg.get("session", None),
-            config=cfg,
-            verbose=verbose
-        )
