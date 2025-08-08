@@ -53,7 +53,10 @@ class DatasetManager:
             print("Event IDs:", loader.event_id)
             print("Events shape:", loader.events.shape)
             print("Epochs shape:", self.epochs_list[i].get_data().shape)
-
+          
+            subject = loader.subject
+            run = loader.run
+          
             if with_plots:
                 print("Generating plots...")
                 raw = loader.get_raw()
